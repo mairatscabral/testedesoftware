@@ -1,0 +1,22 @@
+Iniciando Fuzzing na Petstore...
+❌ [POST] https://petstore.swagger.io/v2/pet/{petId}/uploadImage -> ERROR: 415
+❌ [POST] https://petstore.swagger.io/v2/pet -> ERROR: 415
+❌ [PUT] https://petstore.swagger.io/v2/pet -> ERROR: 415
+✔️ [GET] https://petstore.swagger.io/v2/pet/findByStatus -> 200
+✔️ [GET] https://petstore.swagger.io/v2/pet/findByTags -> 200
+❌ [GET] https://petstore.swagger.io/v2/pet/{petId} -> ERROR: 404
+❌ [POST] https://petstore.swagger.io/v2/pet/{petId} -> ERROR: 404
+❌ [DELETE] https://petstore.swagger.io/v2/pet/{petId} -> ERROR: 404
+✔️ [GET] https://petstore.swagger.io/v2/store/inventory -> 200
+❌ [POST] https://petstore.swagger.io/v2/store/order -> ERROR: 415
+❌ [GET] https://petstore.swagger.io/v2/store/order/{orderId} -> ERROR: 404
+❌ [DELETE] https://petstore.swagger.io/v2/store/order/{orderId} -> ERROR: 404
+❌ [POST] https://petstore.swagger.io/v2/user/createWithList -> ERROR: 500
+❌ [GET] https://petstore.swagger.io/v2/user/{username} -> ERROR: 404
+❌ [PUT] https://petstore.swagger.io/v2/user/{username} -> ERROR: 415
+❌ [DELETE] https://petstore.swagger.io/v2/user/{username} -> ERROR: 404
+✔️ [GET] https://petstore.swagger.io/v2/user/login -> 200
+✔️ [GET] https://petstore.swagger.io/v2/user/logout -> 200
+❌ [POST] https://petstore.swagger.io/v2/user/createWithArray -> ERROR: 500
+❌ [POST] https://petstore.swagger.io/v2/user -> ERROR: 415
+✔️ Fuzzing concluído.
