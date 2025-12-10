@@ -1,0 +1,1366 @@
+
+ ✅  Loaded specification from \Users\leticiap\Documents\petstore.json
+ (in 1.94s)
+
+     Base URL:         https://petstore.swagger.io/v2
+     Specification:    Open API 2.0
+     Operations:       20 selected / 20 total
+
+ ✅  API capabilities:
+
+     Supports NULL byte in headers:    ✘
+
+ ❌  Examples (in 3.03s)
+
+     ❌  2 failed  ⏭  18 skipped
+
+ ❌  Coverage (in 28.17s)
+
+     ❌ 20 failed
+
+ ❌  Fuzzing (in 24.45s)
+
+     ✅  2 passed  ❌ 18 failed
+
+ 🚫  Stateful (in 365.78s)
+
+     Scenarios:    943
+     API Links:    15 covered / 28 selected / 28 total (28 inferred)
+
+     ✅ 843 passed  ❌ 33 failed  🚫 67 errors
+
+============================================= ERRORS ============================================
+_________________________________________ Stateful tests ________________________________________
+Runtime Error
+
+'latin-1' codec can't encode character '\u0100' in position 0: Body ('Ā') is not valid Latin-1. Use body.encode('utf-8') if you want to send it encoded in UTF-8.
+
+    Traceback (most recent call last):
+      File "C:\Python311\Lib\site-packages\schemathesis\engine\phases\stateful\_executor.py", line 250, in execute_state_machine_loop
+        InstrumentedStateMachine.run(settings=hypothesis_settings)
+      File "C:\Python311\Lib\site-packages\schemathesis\generation\stateful\state_machine.py", line 222, in run
+        return run_state_machine_as_test(cls, settings=settings)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\schemathesis\generation\stateful\__init__.py", line 42, in run_state_machine_as_test
+        return _run_state_machine_as_test(state_machine_factory, settings=settings, _min_steps=2)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\hypothesis\stateful.py", line 273, in run_state_machine_as_test
+        state_machine_test()
+      File "C:\Python311\Lib\site-packages\hypothesis\stateful.py", line 123, in run_state_machine
+        @given(st.data())
+                   ^^^
+      File "C:\Python311\Lib\site-packages\hypothesis\core.py", line 2234, in wrapped_test
+        raise the_error_hypothesis_found
+      File "C:\Python311\Lib\site-packages\schemathesis\specs\openapi\stateful\__init__.py", line 373, in step_function
+        return APIStateMachine._step(self, input=input)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\schemathesis\generation\stateful\state_machine.py", line 235, in _step
+        return self.step(input)
+               ^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\schemathesis\engine\phases\stateful\_executor.py", line 127, in step
+        result = super().step(input)
+                 ^^^^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\schemathesis\generation\stateful\state_machine.py", line 241, in step
+        response = self.call(input.case, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\schemathesis\generation\stateful\state_machine.py", line 264, in call
+        return case.call(**kwargs)
+               ^^^^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\schemathesis\generation\case.py", line 359, in call
+        response = transport_.send(
+                   ^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\schemathesis\transport\requests.py", line 151, in send
+        response = session.request(**data)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\requests\sessions.py", line 589, in request
+        resp = self.send(prep, **send_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\requests\sessions.py", line 703, in send
+        r = adapter.send(request, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\requests\adapters.py", line 644, in send
+        resp = conn.urlopen(
+               ^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\urllib3\connectionpool.py", line 716, in urlopen
+        httplib_response = self._make_request(
+                           ^^^^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\site-packages\urllib3\connectionpool.py", line 416, in _make_request
+        conn.request(method, url, **httplib_request_kw)
+      File "C:\Python311\Lib\site-packages\urllib3\connection.py", line 244, in request
+        super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+      File "C:\Python311\Lib\http\client.py", line 1283, in request
+        self._send_request(method, url, body, headers, encode_chunked)
+      File "C:\Python311\Lib\http\client.py", line 1328, in _send_request
+        body = _encode(body, 'body')
+               ^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Python311\Lib\http\client.py", line 166, in _encode
+        raise UnicodeEncodeError(
+    UnicodeEncodeError: 'latin-1' codec can't encode character '\u0100' in position 0: Body ('Ā') is not valid Latin-1. Use body.encode('utf-8') if you want to send it encoded in UTF-8.
+    Reproduce with:
+        curl -X POST -H 'Content-Type: application/xml' -d 'Ā' https://petstore.swagger.io/v2/pet
+
+Need more help?
+    Join our Discord server: https://discord.gg/R9ASRAmHnA
+============================================ FAILURES ===========================================
+___________________________________________ POST /pet ___________________________________________
+1. Test Case ID: h5Pk5j
+
+- Undocumented HTTP status code
+
+    Received: 200
+    Documented: 405
+
+[200] OK:
+
+    `{"id":9223372036854775807,"name":"doggie","photoUrls":[],"tags":[]}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/xml' -d '<Pet><name>doggie</name><photoUrls></photoUrls></Pet>' https://petstore.swagger.io/v2/pet
+
+2. Test Case ID: qezqvh
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '{"category": {}, "id": 0, "name": "doggie", "photoUrls": [], "status": "sold", "tags": []}' https://petstore.swagger.io/v2/pet
+
+____________________________________________ PUT /pet ___________________________________________
+1. Test Case ID: xfq9Jv
+
+- Undocumented HTTP status code
+
+    Received: 200
+    Documented: 400, 404, 405
+
+[200] OK:
+
+    `{"id":9223372036854775807,"name":"doggie","photoUrls":[],"tags":[]}`
+
+Reproduce with:
+
+    curl -X PUT -H 'Content-Type: application/xml' -d '<Pet><name>doggie</name><photoUrls></photoUrls></Pet>' https://petstore.swagger.io/v2/pet
+
+2. Test Case ID: 9cSOGW
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '{"category": {}, "id": 0, "name": "doggie", "photoUrls": [], "status": "sold", "tags": []}' https://petstore.swagger.io/v2/pet
+
+____________________________________ DELETE /user/{username} ____________________________________
+1. Test Case ID: FU2O4d
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore.swagger.io/v2/user/0
+
+2. Test Case ID: 2JoBrl
+
+- Missing Content-Type header
+
+    The following media types are documented in the schema:
+    - `application/json`
+    - `application/xml`
+
+[404] Not Found:
+
+    <EMPTY>
+
+Reproduce with:
+
+    curl -X DELETE https://petstore.swagger.io/v2/user/0
+
+_____________________________________ GET /pet/findByStatus _____________________________________
+1. Test Case ID: pwFqBM
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore.swagger.io/v2/pet/findByStatus
+
+2. Test Case ID: q9z2ac
+
+- Response violates schema
+
+    None is not of type 'string'
+
+    Schema at /items/properties/photoUrls/items:
+
+        {
+            "type": "string",
+            "xml": {
+                "name": "photoUrl"
+            }
+        }
+
+    Value:
+
+        null
+
+[200] OK:
+
+    `[{"id":22222,"category":{"id":111,"name":"jarmanshaped"},"name":"gajji kukka","photoUrls":[null],"tags":[{"id":1,"name":"nabati"}],"status":"pending"},{"id":1003,"name":"Lucy","photoUrls":["url1"],"tags":[],"status":"pending"},{"id":1765360797840,"category":{"id":1,"name":"dogs"},"name":"Безымянный питомец","photoUrls":["https://example.com/photo.jpg"],"tags":[{"id":1,"name":"pet"}],"status":"pending"},{"id":1382,"category":{"id":1417,"name":"star"},"name":"money","photoUrls":["https://dummyimage.com/179x10 // Output truncated...`
+
+Reproduce with:
+
+    curl -X GET 'https://petstore.swagger.io/v2/pet/findByStatus?status=pending&status=pending'
+
+______________________________________ GET /pet/findByTags ______________________________________
+1. Test Case ID: l1omCD
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore.swagger.io/v2/pet/findByTags
+
+______________________________________ GET /store/inventory _____________________________________
+1. Test Case ID: zFxmu7
+
+- API accepts requests without authentication
+
+    Expected 401, got `200 OK` for `GET /store/inventory`
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: Missing `api_key` at header
+
+- Missing header not rejected
+
+    Got 200 when missing required 'api_key' header, expected 406
+
+[200] OK:
+
+    `{"sold":35,"5000":1,"string":163,"unavailable":8,"pending":56,"available":692,"delivered":1,"peric":10,"not_a_valid_status":1,"approved":2,"invalid_status":3,"Available":1,"小学":1,"Pending":1}`
+
+Reproduce with:
+
+    curl -X GET https://petstore.swagger.io/v2/store/inventory
+
+________________________________________ GET /user/login ________________________________________
+1. Test Case ID: IUFuxT
+
+- Response header does not conform to the schema
+
+    'Wed Dec 10 15:08:17 UTC 2025' is not a 'date-time'
+
+    Schema:
+
+        {
+            "format": "date-time",
+            "type": "string",
+            "description": "date in UTC when token expires"
+        }
+
+    Value:
+
+        "Wed Dec 10 15:08:17 UTC 2025"
+
+- Response violates schema
+
+    {'code': 200, 'type': 'unknown', 'message': 'logged in user session:1765375697872'} is not of type 'string'
+
+    Schema:
+
+        {
+            "type": "string"
+        }
+
+    Value:
+
+        {
+            "code": 200,
+            "type": "unknown",
+            "message": "logged in user session:1765375697872"
+        }
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: Missing `password` at query
+
+[200] OK:
+
+    `{"code":200,"type":"unknown","message":"logged in user session:1765375697872"}`
+
+Reproduce with:
+
+    curl -X GET 'https://petstore.swagger.io/v2/user/login?username='
+
+________________________________________ GET /user/logout _______________________________________
+1. Test Case ID: sqo1ST
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore.swagger.io/v2/user/logout
+
+______________________________________ GET /user/{username} _____________________________________
+1. Test Case ID: aYABEw
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore.swagger.io/v2/user/0
+
+2. Test Case ID: XU81oy
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+- Undocumented Content-Type
+
+    Received: text/html
+    Documented: application/json, application/xml
+
+[400] Bad Request:
+
+    `<html>
+    <head><title>400 Bad Request</title></head>
+    <body>
+    <center><h1>400 Bad Request</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X GET https://petstore.swagger.io/v2/user/%F1%BA%A6%A8%F0%AF%8E%8F%5B%C2%9A%C3%A9%C3%BF%C2%8Ez%1B%C2%9E%1BA%00%F3%BA%B8%9B%C3%B5
+
+________________________________________ GET /pet/{petId} _______________________________________
+1. Test Case ID: KQn6cV
+
+- Missing header not rejected
+
+    Got 404 when missing required 'api_key' header, expected 406
+
+[404] Not Found:
+
+    `{"code":1,"type":"error","message":"Pet not found"}`
+
+Reproduce with:
+
+    curl -X GET https://petstore.swagger.io/v2/pet/0
+
+2. Test Case ID: w4RQDr
+
+- Missing Content-Type header
+
+    The following media types are documented in the schema:
+    - `application/json`
+    - `application/xml`
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+[400] Bad Request:
+
+    <EMPTY>
+
+Reproduce with:
+
+    curl -X GET -H 'api_key: [Filtered]' https://petstore.swagger.io/v2/pet/84
+
+___________________________________________ POST /user __________________________________________
+1. Test Case ID: QqO6C3
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '{"email": "", "firstName": "", "id": 0, "lastName": "", "password": "", "phone": "", "userStatus": 0, "username": ""}' https://petstore.swagger.io/v2/user
+
+2. Test Case ID: D46fEG
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"type":"unknown","message":"something bad happened"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d '[]' https://petstore.swagger.io/v2/user
+
+___________________________________ POST /user/createWithArray __________________________________
+1. Test Case ID: zPXJrw
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '[]' https://petstore.swagger.io/v2/user/createWithArray
+
+2. Test Case ID: jtIbgT
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"type":"unknown","message":"something bad happened"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d false https://petstore.swagger.io/v2/user/createWithArray
+
+___________________________________ POST /user/createWithList ___________________________________
+1. Test Case ID: nzzolg
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '[]' https://petstore.swagger.io/v2/user/createWithList
+
+2. Test Case ID: 8muUya
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"type":"unknown","message":"something bad happened"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d false https://petstore.swagger.io/v2/user/createWithList
+
+______________________________________ PUT /user/{username} _____________________________________
+1. Test Case ID: rclmCR
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '{"email": "", "firstName": "", "id": 0, "lastName": "", "password": "", "phone": "", "userStatus": 0, "username": ""}' https://petstore.swagger.io/v2/user/0
+
+2. Test Case ID: q3dz5G
+
+- Undocumented HTTP status code
+
+    Received: 200
+    Documented: 400, 404
+
+[200] OK:
+
+    `{"code":200,"type":"unknown","message":"0"}`
+
+Reproduce with:
+
+    curl -X PUT -H 'Content-Type: application/json' -d '{}' https://petstore.swagger.io/v2/user/0
+
+______________________________________ DELETE /pet/{petId} ______________________________________
+1. Test Case ID: vkUezf
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'api_key: [Filtered]' https://petstore.swagger.io/v2/pet/0
+
+2. Test Case ID: aw2ROF
+
+- Missing Content-Type header
+
+    The following media types are documented in the schema:
+    - `application/json`
+    - `application/xml`
+
+[404] Not Found:
+
+    <EMPTY>
+
+Reproduce with:
+
+    curl -X DELETE https://petstore.swagger.io/v2/pet/0
+
+_______________________________________ POST /pet/{petId} _______________________________________
+1. Test Case ID: Cd6ZUg
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/x-www-form-urlencoded' -d 'name=&status=' https://petstore.swagger.io/v2/pet/0
+
+2. Test Case ID: aNX9WG
+
+- Undocumented HTTP status code
+
+    Received: 404
+    Documented: 405
+
+[404] Not Found:
+
+    `{"code":404,"type":"unknown","message":"not found"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' https://petstore.swagger.io/v2/pet/0
+
+_________________________________ POST /pet/{petId}/uploadImage _________________________________
+1. Test Case ID: 4hB4Jb
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: multipart/form-data; boundary=001730ec7c292f4ed1787ec2a6e354a3' -d $'--f4428330505dab94e044c83b489a2f4e\r\nContent-Disposition: form-data; name="additionalMetadata"; filename="additionalMetadata"\r\n\r\n\r\n--f4428330505dab94e044c83b489a2f4e\r\nContent-Disposition: form-data; name="file"; filename="file"\r\n\r\n\r\n--f4428330505dab94e044c83b489a2f4e--\r\n' https://petstore.swagger.io/v2/pet/0/uploadImage
+
+    ⚠️  Request body contains non-printable characters. Actual value: b'--f4428330505dab94e044c83b489a2f4e\r\nContent-Disposition: form-data; name="additionalMetadata"; filename="additionalMetadata"\r\n\r\n\r\n--f4428330505dab94e044c83b489a2f4e\r\nContent-Disposition: form-data; name="file"; filename="file"\r\n\r\n\r\n--f4428330505dab94e044c83b489a2f4e--\r\n'
+
+2. Test Case ID: XUZsP6
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+- Undocumented HTTP status code
+
+    Received: 415
+    Documented: 200
+
+[415] Unsupported Media Type:
+
+    `{"code":415,"type":"unknown","message":"com.sun.jersey.api.MessageException: A message body reader for Java class com.sun.jersey.multipart.FormDataMultiPart, and Java type class com.sun.jersey.multipart.FormDataMultiPart, and MIME media type application/octet-stream was not found.\nThe registered message body readers compatible with the MIME media type are:\n*/* ->\n  com.sun.jersey.core.impl.provider.entity.FormProvider\n  com.sun.jersey.core.impl.provider.entity.StringProvider\n  com.sun.jersey.core.impl. // Output truncated...`
+
+Reproduce with:
+
+    curl -X POST https://petstore.swagger.io/v2/pet/0/uploadImage
+
+_________________________________ DELETE /store/order/{orderId} _________________________________
+1. Test Case ID: nA3HyU
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore.swagger.io/v2/store/order/1
+
+2. Test Case ID: IMgLka
+
+- Undocumented HTTP status code
+
+    Received: 200
+    Documented: 400, 404
+
+[200] OK:
+
+    `{"code":200,"type":"unknown","message":"1"}`
+
+Reproduce with:
+
+    curl -X DELETE https://petstore.swagger.io/v2/store/order/1
+
+___________________________________ GET /store/order/{orderId} __________________________________
+1. Test Case ID: FvImYv
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore.swagger.io/v2/store/order/1
+
+2. Test Case ID: Bi6N2z
+
+- Response violates schema
+
+    '2025-11-22T02:04:53.111+0000' is not a 'date-time'
+
+    Schema at /properties/shipDate:
+
+        {
+            "format": "date-time",
+            "type": "string"
+        }
+
+    Value:
+
+        "2025-11-22T02:04:53.111+0000"
+
+[200] OK:
+
+    `{"id":10,"petId":10,"quantity":10,"shipDate":"2025-11-22T02:04:53.111+0000","status":"placed","complete":true}`
+
+Reproduce with:
+
+    curl -X GET https://petstore.swagger.io/v2/store/order/10
+
+_______________________________________ POST /store/order _______________________________________
+1. Test Case ID: Woa49a
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '{"complete": false, "id": 0, "petId": 0, "quantity": 0, "shipDate": "2000-01-01T00:00:00Z", "status": "placed"}' https://petstore.swagger.io/v2/store/order
+
+2. Test Case ID: mXFeBS
+
+- Server error
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 200, 400
+
+[500] Internal Server Error:
+
+    `{"code":500,"type":"unknown","message":"something bad happened"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d '[]' https://petstore.swagger.io/v2/store/order
+
+_________________________________________ Stateful tests ________________________________________
+1. Test Case ID: ylYGDQ
+
+- Response violates schema
+
+    '7113-02-05T12:54:31.549+0000' is not a 'date-time'
+
+    Schema at /properties/shipDate:
+
+        {
+            "format": "date-time",
+            "type": "string"
+        }
+
+    Value:
+
+        "7113-02-05T12:54:31.549+0000"
+
+[200] OK:
+
+    `{"id":1765343792249,"petId":0,"quantity":-11680,"shipDate":"7113-02-05T12:54:31.549+0000","complete":false}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d '{"shipDate": "7113-02-05T12:54:31.549957Z", "\u00afu\u00d5\udbd5\uddceHb": {"\u00b5F": {}, "\ud99e\udc26": {}}, "\u00d2\u00ee/\u001cj(\u008fr": {"ps": {"1": {"\u00cd\ud80f\udc78\u00c5\u00e7\uda28\udf3f\u0090": 1.8580541674626433e-140, "\u0004F\u001d\uda0d\uddd5\u00ab}\u00a2H": -5731017390612832809, "\ud8c7\udd52\u0096\u00e0\u00fa\udb98\ude5a\u00dc": 155313366041024414698982823443114008766}, "n\u008b\u0085=n\u008f\udb14\udde7\udb70\udd56t9": {}, "": []}, "\u00cb\udae6\udc1b&e\u000b<\u00cf\udb6d\udcc5\ud8dc\ude15\u0080\ud943\udfb8\ud98f\udde3&\u00ff\u00f2\uda83\udc13": -60, "\ud8c5\ude33\ud84b\udccf\ud9aa\udda8\ud87c\udf8f[\u009a\u00e9\u00ff\u008ez\u001b\u009e\u001bA\u0000\udbab\ude1b\u00f5": {"U\u1a15wk\udaca\udfab\u0012Y-\u00ea\u001b": {"\u00f7B\u00ca\udaf4\uddb4m\ud828\udd54\ud99f\ude21": -6.566572214277888e+16, "CH\u0083>\u00d6\u00bc\u00e4\udba1\udce0": -3473975778710558.0, "q%\u0000\u0085\u001c@u\u00b2": 4.711791405105457e-225}, "\u00bf\ud82c\udcf4\ud872\udd1f": {}}}, "quantity": -11680}' https://petstore.swagger.io/v2/store/order
+
+2. Test Case ID: wuawKY
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+- Undocumented Content-Type
+
+    Received: text/html
+    Documented: application/json, application/xml
+
+[400] Bad Request:
+
+    `<html>
+    <head><title>400 Bad Request</title></head>
+    <body>
+    <center><h1>400 Bad Request</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X GET -H 'api_key: [Filtered]' 'https://petstore.swagger.io/v2/pet/findByTags?tags=%7BU'
+    curl -X DELETE -H 'api_key: [Filtered]' https://petstore.swagger.io/v2/pet/-31021
+
+3. Test Case ID: GLPhX5
+
+- Undocumented HTTP status code
+
+    Received: 200
+    Documented: 405
+
+[200] OK:
+
+    `{"code":200,"type":"unknown","message":"5180"}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/x-www-form-urlencoded' 'https://petstore.swagger.io/v2/pet/findByStatus?g%C3%9C%C2%9D%24%08%2A%C3%A7%F2%B5%A2%BC=%7B%27%5CU000bf97b7%5Cx1c%5Cx10i%5CU000e302c%C3%AC%C3%B8%5Cxad%5Cx18%5CU000d9469%5Cx04%5Cx96%C2%BD%5CU00061ce0%3F%C3%B2%5CU0005c8d3%27%3A+-7.195821524082681e%2B16%7D&g%C3%9C%C2%9D%24%08%2A%C3%A7%F2%B5%A2%BC=%5B5.4450192742049956e%2B45%2C+%7B%27%C3%9C%C3%94n%27%3A+60%2C+%27%C3%96%C3%8A%C2%BCR%5CU000f70a5K%5Cx7f%5Cx05%C2%BD%C3%89%5Cx82%22%5Cx9b%24%C3%A8%5CU000ed394%27%3A+True%2C+%27%C2%BA%5CU000e5e08X%C3%BB%C2%B9%5CU0006c788%27%3A+True%7D%5D&g%C3%9C%C2%9D%24%08%2A%C3%A7%F2%B5%A2%BC=%7B%7D&%C3%84%13%F4%88%84%94%C2%97%1D%F3%AE%9A%93=%EF%A6%83%F2%83%9A%8D%EE%B5%84&%C3%84%13%F4%88%84%94%C2%97%1D%F3%AE%9A%93=0..0&%C3%84%13%F4%88%84%94%C2%97%1D%F3%AE%9A%93=8096&Y%C3%AB9n%F2%8B%AE%A8%C3%AC%C2%9F%06%29~%F0%A8%8F%93q%03o%C2%88%2F%C3%95%EE%8D%8A%C2%AAt=%C2%A09%C2%80%F1%87%BA%94%F2%A6%82%87%F0%A7%AF%8B%C3%92F1%C3%B1&Y%C3%AB9n%F2%8B%AE%A8%C3%AC%C2%9F%06%29~%F0%A8%8F%93q%03o%C2%88%2F%C3%95%EE%8D%8A%C2%AAt=%C2%92m%C3%8E&Y%C3%AB9n%F2%8B%AE%A8%C3%AC%C2%9F%06%29~%F0%A8%8F%93q%03o%C2%88%2F%C3%95%EE%8D%8A%C2%AAt=%C2%8Bn&Y%C3%AB9n%F2%8B%AE%A8%C3%AC%C2%9F%06%29~%F0%A8%8F%93q%03o%C2%88%2F%C3%95%EE%8D%8A%C2%AAt=False&1j%F0%9D%A2%90A%09%C3%B8z=&%0F%C2%AF%7B%C2%84%F1%88%83%9E8=&%C3%9F%C3%96F-%7B%26m%C2%85%F4%81%86%9B%C3%B2%F3%80%83%80=&%C2%92%F2%A7%84%A3%C2%A6=25706&%F2%8E%96%A2z=else'
+    curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' https://petstore.swagger.io/v2/pet/5180
+
+4. Test Case ID: 5S744p
+
+- Response violates schema
+
+    'name' is a required property
+
+    Schema at /items:
+
+        {
+            "required": [
+                "name",
+                "photoUrls"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "category": {
+                    "$ref": "#/definitions/Category"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "doggie"
+                },
+                "photoUrls": {
+            // Output truncated...
+        }
+
+    Value:
+
+        {
+            "id": 9223372036854754995,
+            "photoUrls": [
+                "https://example.com/photo1.jpg"
+            ],
+            "tags": [],
+            "status": "available"
+        }
+
+[200] OK:
+
+    `[{"id":50800105,"category":{"id":-3382005,"name":"veniam"},"name":"doggie","photoUrls":["eu cillum","culpa adipisicing proident veniam"],"tags":[{"id":-13038983,"name":"aute do in Excepteur Ut"},{"id":86652366,"name":"ad"}],"status":"available"},{"id":9223372036854754856,"name":"doggie","photoUrls":["string"],"tags":[],"status":"available"},{"id":9223372036854754857,"name":"doggie","photoUrls":["string"],"tags":[],"status":"available"},{"id":9223372036854754858,"name":"doggie","photoUrls":["string"],"tags": // Output truncated...`
+
+Reproduce with:
+
+    curl -X GET 'https://petstore.swagger.io/v2/pet/findByStatus?status=available&status=pending&status=sold&status=pending&status=available&status=available&status=available&status=pending&status=sold&status=sold&status=available&status=sold&status=pending&status=pending&status=available&status=available'
+
+5. Test Case ID: 6eBpyW
+
+- Response violates schema
+
+    '3\x87\x0c\xadØô(\U000f6874\x84\x9a' is not one of ['placed', 'approved', 'delivered']
+
+    Schema at /properties/status:
+
+        {
+            "enum": [
+                "placed",
+                "approved",
+                "delivered"
+            ],
+            "type": "string",
+            "description": "Order Status"
+        }
+
+    Value:
+
+        "3\u0087\f\u00ad\u00d8\u00f4(\udb9a\udc74\u0084\u009a"
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in body - violates `description` (Order Status), `enum` (['placed', 'approved', 'delivered'])
+
+[200] OK:
+
+    `{"id":1765343792256,"petId":0,"quantity":0,"status":"3\f­Øô(\uDB9A\uDC74","complete":false}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d '{"status": "3\u0087\f\u00ad\u00d8\u00f4(\udb9a\udc74\u0084\u009a"}' https://petstore.swagger.io/v2/store/order
+
+6. Test Case ID: D1hC0g
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in body - violates `$ref` (#/x-bundled/schema4), `x-bundled` ({'schema5': {'type': 'object', 'properties': {'id': {'type': 'integer', 'format': 'int64'}, 'name': {'type': 'string'}}, 'xml': {'name': 'Category'}}, 'schema6': {'type': 'object', 'properties': {'id': {'type': 'integer', 'format': 'int64'}, 'name': {'type': 'string'}}, 'xml': {'name': 'Tag'}}, 'schema4': {'type': 'object', 'required': ['name', 'photoUrls'], 'properties': {'id': {'type': 'integer', 'format': 'int64'}, 'category': {'$ref': '#/x-bundled/schema5'}, 'name': {'type': 'string', 'example': 'doggie'}, 'photoUrls': {'type': 'array', 'xml': {'wrapped': True}, 'items': {'type': 'string', 'xml': {'name': 'photoUrl'}}}, 'tags': {'type': 'array', 'xml': {'wrapped': True}, 'items': {'xml': {'name': 'tag'}, '$ref': '#/x-bundled/schema6'}}, 'status': {'type': 'string', 'description': 'pet status in the store', 'enum': ['available', 'pending', 'sold']}}, 'xml': {'name': 'Pet'}}})
+
+[200] OK:
+
+    `{"id":9223372036854775807,"photoUrls":[],"tags":[]}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/xml' 'https://petstore.swagger.io/v2/pet/findByTags?tags=&tags=%C2%8B%C2%A2%C2%A4%C3%8F&tags='
+    curl -X PUT -H 'Content-Type: application/xml' -d '<Pet>True</Pet>' https://petstore.swagger.io/v2/pet
+
+7. Test Case ID: eqbYdZ
+
+- Server error
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 400, 404, 405
+
+[500] Internal Server Error:
+
+    `{"code":500,"type":"unknown","message":"something bad happened"}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/json' 'https://petstore.swagger.io/v2/pet/findByTags?tags=E%F3%AD%89%B2%1D'
+    curl -X PUT -H 'Content-Type: application/json' -d -5.43065558615516e+16 https://petstore.swagger.io/v2/pet
+
+8. Test Case ID: hIk9fG
+
+- Undocumented HTTP status code
+
+    Received: 400
+    Documented: 200
+
+[400] Bad Request:
+
+    `{"code":400,"type":"unknown","message":"org.jvnet.mimepull.MIMEParsingException: Reached EOF, but there is no closing MIME boundary."}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: multipart/form-data; boundary=845189bee6828ebc29278dd55df75d90' 'https://petstore.swagger.io/v2/pet/findByTags?tags=&tags=%C3%B5%F0%AA%9A%99%C2%90Z'
+    curl -X POST -H 'Content-Type: multipart/form-data; boundary=845189bee6828ebc29278dd55df75d90' -d $'--908ce643ae62d40654bdc9869860894a\r\n-1284942568--908ce643ae62d40654bdc9869860894a--\r\n' https://petstore.swagger.io/v2/pet/%14%C3%9EQ%F3%89%8C%AA%C3%AA/uploadImage
+
+    ⚠️  Request body contains non-printable characters. Actual value: b'--908ce643ae62d40654bdc9869860894a\r\n-1284942568--908ce643ae62d40654bdc9869860894a--\r\n'
+
+9. Test Case ID: EgzvZI
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in body - invalid type number (expected string)
+
+[200] OK:
+
+    `{"code":200,"type":"unknown","message":"additionalMetadata: 4.519667418369088e-62\nFile uploaded to ./file, 3 bytes"}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: multipart/form-data; boundary=abfdd599442ebb25bd9bfef70d3e286e' 'https://petstore.swagger.io/v2/pet/findByStatus?status=sold&status=pending&status=sold&status=pending'
+    curl -X POST -H 'Content-Type: multipart/form-data; boundary=abfdd599442ebb25bd9bfef70d3e286e' -d $'--1d6e49adb703492893b59e6f3f609764\r\nContent-Disposition: form-data; name="additionalMetadata"; filename="additionalMetadata"\r\n\r\n4.519667418369088e-62\r\n--1d6e49adb703492893b59e6f3f609764\r\nContent-Disposition: form-data; name="file"; filename="file"\r\n\r\n˵\x02\r\n--1d6e49adb703492893b59e6f3f609764--\r\n' https://petstore.swagger.io/v2/pet/398168/uploadImage
+
+    ⚠️  Request body contains non-printable characters. Actual value: b'--1d6e49adb703492893b59e6f3f609764\r\nContent-Disposition: form-data; name="additionalMetadata"; filename="additionalMetadata"\r\n\r\n4.519667418369088e-62\r\n--1d6e49adb703492893b59e6f3f609764\r\nContent-Disposition: form-data; name="file"; filename="file"\r\n\r\n\xcb\xb5\x02\r\n--1d6e49adb703492893b59e6f3f609764--\r\n'
+
+10. Test Case ID: Gg9wZ8
+
+- Undocumented HTTP status code
+
+    Received: 200
+    Documented: 400, 404
+
+[200] OK:
+
+    `{"code":200,"type":"unknown","message":"962973"}`
+
+Reproduce with:
+
+    curl -X GET 'https://petstore.swagger.io/v2/pet/findByStatus?status=sold&status=available'
+    curl -X DELETE https://petstore.swagger.io/v2/pet/962973
+
+11. Test Case ID: WLuThP
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in body - violates `additionalProperties` (False)
+
+[200] OK:
+
+    `{"code":200,"type":"unknown","message":"50800105"}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/x-www-form-urlencoded' 'https://petstore.swagger.io/v2/pet/findByStatus?status=available&status=pending&status=pending&status=available&status=available&status=sold&status=sold&status=available&status=available&status=sold&status=pending'
+    curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' -d %C2%A7%C3%96%1F%C3%978%F2%92%82%BE%C3%9A%07%C3%8E%C2%B8%60%C3%98%F2%A4%90%9C%C3%AA%F2%90%AF%B6=-30026 https://petstore.swagger.io/v2/pet/50800105
+
+12. Test Case ID: gaOJPF
+
+- API accepts invalid authentication
+
+    Expected 401, got `200 OK` for `GET /pet/{petId}` (generated auth likely invalid)
+
+[200] OK:
+
+    `{"id":6877,"category":{"id":3599,"name":"book"},"name":"money","photoUrls":["https://placekitten.com/984/367"],"tags":[{"id":2947,"name":"face"}],"status":"pending"}`
+
+Reproduce with:
+
+    curl -X GET -H 'api_key: [Filtered]' 'https://petstore.swagger.io/v2/pet/findByStatus?status=pending&status=pending&status=available&status=sold&status=pending&status=available&status=available&status=sold&status=sold&status=available'
+    curl -X GET -H 'api_key: [Filtered]' https://petstore.swagger.io/v2/pet/6877
+
+13. Test Case ID: f3kX6b
+
+- Response violates schema
+
+    'delivered' is not one of ['available', 'pending', 'sold']
+
+    Schema at /properties/status:
+
+        {
+            "enum": [
+                "available",
+                "pending",
+                "sold"
+            ],
+            "type": "string",
+            "description": "pet status in the store"
+        }
+
+    Value:
+
+        "delivered"
+
+[200] OK:
+
+    `{"id":31,"category":{"id":5128,"name":"few"},"name":"her","photoUrls":["https://picsum.photos/155/351"],"tags":[{"id":7515,"name":"weight"}],"status":"delivered"}`
+
+Reproduce with:
+
+    curl -X GET -H 'api_key: [Filtered]' https://petstore.swagger.io/v2/pet/findByStatus
+    curl -X GET -H 'api_key: [Filtered]' https://petstore.swagger.io/v2/pet/31
+
+14. Test Case ID: dvtD0p
+
+- Undocumented HTTP status code
+
+    Received: 400
+    Documented: 405
+
+[400] Bad Request:
+
+    `{"code":400,"type":"unknown","message":"javax.xml.bind.UnmarshalException\n - with linked exception:\n[org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 13; The markup in the document following the root element must be well-formed.]"}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/xml' 'https://petstore.swagger.io/v2/pet/findByTags?tags=%03%24&tags=%C3%90%F0%B8%9E%8Fp%C3%9A&tags=%C3%B3&tags=%F4%8E%AA%94%7C&tags=%F3%BC%84%A0%C2%B3%F2%A8%8E%8B%0FvA%C2%9CY%0Dj%C3%AC%F1%A7%86%B8%C3%92%C2%A3&tags=%E3%98%A2%24'
+    curl -X POST -H 'Content-Type: application/xml' -d $'<Pet></Pet><Pet><__P________r___________>1.4178683219841235e-185</__P________r___________><__P________r___________></__P________r___________><__P________r___________>True</__P________r___________><___>6303</___></Pet><Pet>True</Pet><Pet><element>14060</element></Pet><Pet><______>𐭵â񾻻Ô򋣼|\nq¨Ðß=ÌÆ𺙕&quot;</______></Pet><Pet></Pet>' https://petstore.swagger.io/v2/pet
+
+    ⚠️  Request body contains non-printable characters. Actual value: b'<Pet></Pet><Pet><__P________r___________>1.4178683219841235e-185</__P________r___________><__P________r___________></__P________r___________><__P________r___________>True</__P________r___________><___>6303</___></Pet><Pet>True</Pet><Pet><element>14060</element></Pet><Pet><______>\xf0\x90\xad\xb5\xc3\xa2\xf1\xbe\xbb\xbb\xc3\x94\xc2\x81\xf2\x8b\xa3\xbc|\nq\xc2\xa8\xc3\x90\xc3\x9f=\xc3\x8c\xc3\x86\xf0\xba\x99\x95&quot;</______></Pet><Pet></Pet>'
+
+15. Test Case ID: n49Zug
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in body - violates `$ref` (#/x-bundled/schema1), `x-bundled` ({'schema2': {'type': 'object', 'properties': {'id': {'type': 'integer', 'format': 'int64'}, 'name': {'type': 'string'}}, 'xml': {'name': 'Category'}}, 'schema3': {'type': 'object', 'properties': {'id': {'type': 'integer', 'format': 'int64'}, 'name': {'type': 'string'}}, 'xml': {'name': 'Tag'}}, 'schema1': {'type': 'object', 'required': ['name', 'photoUrls'], 'properties': {'id': {'type': 'integer', 'format': 'int64'}, 'category': {'$ref': '#/x-bundled/schema2'}, 'name': {'type': 'string', 'example': 'doggie'}, 'photoUrls': {'type': 'array', 'xml': {'wrapped': True}, 'items': {'type': 'string', 'xml': {'name': 'photoUrl'}}}, 'tags': {'type': 'array', 'xml': {'wrapped': True}, 'items': {'xml': {'name': 'tag'}, '$ref': '#/x-bundled/schema3'}}, 'status': {'type': 'string', 'description': 'pet status in the store', 'enum': ['available', 'pending', 'sold']}}, 'xml': {'name': 'Pet'}}})
+
+[405] Method Not Allowed:
+
+    `{"code":405,"type":"unknown","message":"no data"}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/json' https://petstore.swagger.io/v2/pet/findByTags
+    curl -X POST -H 'Content-Type: application/json' -d null https://petstore.swagger.io/v2/pet
+
+16. Test Case ID: xU1ICR
+
+- Undocumented Content-Type
+
+    Received: text/html
+    Documented: application/json, application/xml
+
+[400] Bad Request:
+
+    `<html>
+    <head><title>400 Bad Request</title></head>
+    <body>
+    <center><h1>400 Bad Request</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d '{"petId": -24169, "LPT1": {"\u0091\u0083\u009b<": ["3\u008e\ud914\udcfb\u00ca\u0099$", "\u0010?\u00fcx\u00d8\u00e1\u00ba\uda31\udfc4\u0091", false], "\u0083Lc": [[null, {"": 41, "E\u00a6\u0019\u00b8s\u00e6\ue26ck": -4364800024509128100, "\ud816\udc3c": null}, []], true, {}]}, "id": 15176, "shipDate": "2193-10-24T20:46:04.876290Z", "\u00e4\u00c3\ud9b5\udd52w=\u0087\ud874\udda1\ud95f\ude55p\u00b5k": [null, {"\n\u009e\udb99\uddd8q": "\udbbf\udcc1\u00c1\u009e\udb6c\ude7d{"}], "p\u0002\u00f1\uaa27\u009a": {}, "\u00c3D\u00d4\u00fe;\u00d5\u00f7.": {"\u0099\u0016\u00bb": false, "5\u0099\ud9c4\ude4dq\u00bf": -40}, "\u023e": [[39, "\ud961\udd5b,\u00f3+", true], {"0": -29680, "\uda6c\udcc7\u00fc\u0084\ud87c\udd71\ud8ad\udf43\u00a31\u0006\u008d\u00db\u0098\ud9bc\udee2\u00ebV\u00c4\f": {">\b\ud8f2\udf37\udaee\udfb8\u00c4": false, "M\"K\uda79\udddf\ud837\udc32": null, "\u0092\udbfb\ude17\udb6f\udd4a": null}, "\u00f6_": "\u00e3z\u00c4?\u008c\u0016"}, []], "\ud899\uddca\u009d": {"Q\u00d6\u00be3": [127], "\ud83d\ude0d": "\udbe7\udf7e"}, ",\u000bHH\u00c1\u009f\u00a2-D": ["\u00f0\u0018CG\u0012\u0088\u00bb"], "complete": true}' https://petstore.swagger.io/v2/store/order
+    curl -X GET https://petstore.swagger.io/v2/store/order/%06%F1%A3%AA%9E%C3%83k%C3%91%C2%BFF%15%00%C3%AB%5B%C3%B5P%C2%BF%C2%80%C2%90%5E%00
+
+17. Test Case ID: q031ut
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in body - violates `$ref` (#/x-bundled/schema1)
+
+[200] OK:
+
+    `{"id":9223372036854775807,"photoUrls":[],"tags":[]}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/xml' https://petstore.swagger.io/v2/pet/findByStatus
+    curl -X POST -H 'Content-Type: application/xml' -d '<Pet>-6.676919203890402e+131</Pet>' https://petstore.swagger.io/v2/pet
+
+18. Test Case ID: VpeCof
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in body - violates `$ref` (#/x-bundled/schema4)
+
+[405] Method Not Allowed:
+
+    `{"code":405,"type":"unknown","message":"no data"}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/json' 'https://petstore.swagger.io/v2/pet/findByTags?tags=Q&tags=&tags=%F2%80%B0%A2%C3%AD%C3%8F%C3%B0%C3%89&tags=%C3%AD%0B%C3%A1%C3%A06%F1%BB%9D%82%F3%AA%9F%A4%24R%3A%1DF%C2%B8&tags=%C2%98%C3%AA&tags=%2C%2F&tags=&tags=%C2%B6%C3%914&tags=%0A&tags=%C2%9C&tags=&tags=%C3%8ADJ%F2%9D%A7%A4&tags=%F2%98%AB%83%F1%AA%A9%A7'
+    curl -X PUT -H 'Content-Type: application/json' -d null https://petstore.swagger.io/v2/pet
+
+19. Test Case ID: zrcNiN
+
+- Server error
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 405
+
+[500] Internal Server Error:
+
+    `{"code":500,"type":"unknown","message":"something bad happened"}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/json' 'https://petstore.swagger.io/v2/pet/findByTags?tags=%C3%A9%C3%91%C2%92%27%F1%A9%9B%80QF%F3%80%A3%B1&tags=%C3%93%25%3D%F4%86%8B%9D%C3%BF%5B%C2%A8&tags=%12%1D%C2%95%2CA%F0%A5%BF%B9%C3%A8%3D&tags=p&tags=&tags=%C3%97%E6%80%8CN%C3%AD%C3%B7%03'
+    curl -X POST -H 'Content-Type: application/json' -d 1.7976931348623157e+308 https://petstore.swagger.io/v2/pet
+
+20. Test Case ID: Qj8mTB
+
+- Undocumented HTTP status code
+
+    Received: 404
+    Documented: 200
+
+[404] Not Found:
+
+    `{"code":404,"type":"unknown","message":"java.lang.NumberFormatException: For input string: \"null\""}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: multipart/form-data; boundary=f6552d02b843955ca32080026b7cce1d' 'https://petstore.swagger.io/v2/pet/findByTags?%15%C3%8F%F0%A4%83%B0Zg.=30177&%15%C3%8F%F0%A4%83%B0Zg.=None&%15%C3%8F%F0%A4%83%B0Zg.=-3221'
+    curl -X POST -H 'Content-Type: multipart/form-data; boundary=f6552d02b843955ca32080026b7cce1d' -d $'--7860a13e02d399c9ebb580bc546d0e94\r\nContent-Disposition: form-data; name="additionalMetadata"; filename="additionalMetadata"\r\n\r\nNone\r\n--7860a13e02d399c9ebb580bc546d0e94--\r\n' https://petstore.swagger.io/v2/pet/null/uploadImage
+
+    ⚠️  Request body contains non-printable characters. Actual value: b'--7860a13e02d399c9ebb580bc546d0e94\r\nContent-Disposition: form-data; name="additionalMetadata"; filename="additionalMetadata"\r\n\r\nNone\r\n--7860a13e02d399c9ebb580bc546d0e94--\r\n'
+
+21. Test Case ID: bD4DrA
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: parameter `api_key` in header - required property removed
+
+[200] OK:
+
+    `{"id":100,"category":{"id":1,"name":"собака"},"name":"Шарик","photoUrls":[],"tags":[],"status":"available"}`
+
+Reproduce with:
+
+    curl -X GET 'https://petstore.swagger.io/v2/pet/findByStatus?status=available&status=pending&status=pending&status=available&status=pending&status=sold&status=pending'
+    curl -X GET https://petstore.swagger.io/v2/pet/100
+
+22. Test Case ID: 5rt8sS
+
+- Server error
+
+- Undocumented Content-Type
+
+    Received: text/html; charset=ISO-8859-1
+    Documented: application/json
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 200
+
+[500] Internal Server Error:
+
+    `<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Error 500 Internal Server Error</title>
+    </head>
+    <body><h2>HTTP ERROR 500</h2>
+    <p>Problem accessing /v2/pet/0/uploadImage. Reason:
+    <pre>    Internal Server Error</pre></p><hr><i><small>Powered by Jetty://</small></i><hr/>
+
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: multipart/form-data; boundary=5c7cb981e2ae10d81cb647427999bed3' https://petstore.swagger.io/v2/pet/findByTags
+    curl -X POST -H 'Content-Type: multipart/form-data; boundary=5c7cb981e2ae10d81cb647427999bed3' -d $'--5ea8110aa0fed1a1a4ccf08511eca258\r\nContent-Disposition: form-data; name="additionalMetadata"; filename="additionalMetadata"\r\n\r\n\r\n--5ea8110aa0fed1a1a4ccf08511eca258--\r\n' https://petstore.swagger.io/v2/pet/0/uploadImage
+
+    ⚠️  Request body contains non-printable characters. Actual value: b'--5ea8110aa0fed1a1a4ccf08511eca258\r\nContent-Disposition: form-data; name="additionalMetadata"; filename="additionalMetadata"\r\n\r\n\r\n--5ea8110aa0fed1a1a4ccf08511eca258--\r\n'
+
+============================================ SUMMARY ============================================
+
+API Operations:
+  Selected: 20/20
+  Tested: 20
+
+Test Phases:
+  ❌ Examples
+  ❌ Coverage
+  ❌ Fuzzing
+  🚫 Stateful
+
+Failures:
+  ❌ API accepts invalid authentication: 1
+  ❌ API accepts requests without authentication: 1
+  ❌ Server error: 7
+  ❌ Response header does not conform to the schema: 1
+  ❌ Response violates schema: 7
+  ❌ API accepted schema-violating request: 10
+  ❌ API rejected schema-compliant request: 4
+  ❌ Missing Content-Type header: 3
+  ❌ Missing header not rejected: 2
+  ❌ Undocumented Content-Type: 4
+  ❌ Undocumented HTTP status code: 15
+  ❌ Unsupported methods: 17
+
+Errors:
+  🚫 Runtime Error: 1
+
+Test cases:
+  2845 generated, 58 found 72 unique failures, 68 skipped
+
+Seed: 332306867612620532045555306920875526482
+
+================================ 72 failures, 1 error in 422.30s ================================

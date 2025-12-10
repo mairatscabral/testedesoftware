@@ -1,0 +1,1005 @@
+ st run \Users\leticiap\Documents\petstore3.json --url https://petstore3.swagger.io/api/v3
+Schemathesis v4.7.4
+━━━━━━━━━━━━━━━━━━━
+
+ ✅  Loaded specification from \Users\leticiap\Documents\petstore3.json (in 1.39s)
+
+     Base URL:         https://petstore3.swagger.io/api/v3
+     Specification:    Open API 3.0.4
+     Operations:       19 selected / 19 total
+
+ ✅  API capabilities:
+
+     Supports NULL byte in headers:    ✘
+
+ ❌  Examples (in 4.64s)
+
+     ❌  6 failed  ⏭  13 skipped
+
+ ❌  Coverage (in 46.69s)
+
+     ❌ 19 failed
+
+ ❌  Fuzzing (in 8.55s)
+
+     ✅  1 passed  ❌ 18 failed
+
+ ❌  Stateful (in 250.44s)
+
+     Scenarios:    453
+     API Links:    20 covered / 49 selected / 49 total (49 inferred)
+
+     ✅ 431 passed  ❌ 22 failed
+
+========================================== FAILURES =========================================
+_________________________________________ POST /pet _________________________________________
+1. Test Case ID: 97fWMZ
+
+- Response violates schema
+
+    'photoUrls' is a required property
+
+    Schema:
+
+        {
+            "required": [
+                "name",
+                "photoUrls"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 10
+                },
+                "name": {
+                    "type": "string",
+                    "example": "doggie"
+                },
+                "category": {
+                    "$ref": "#/components/schemas/Category"
+                },
+            // Output truncated...
+        }
+
+    Value:
+
+        {
+            "id": 10,
+            "name": "doggie"
+        }
+
+[200] OK:
+
+    `{"id":10,"name":"doggie"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' -d 'id=10&name=doggie&category=id&category=name' https://petstore3.swagger.io/api/v3/pet
+
+2. Test Case ID: 6NrwMs
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '{"category": {}, "id": 10, "name": "doggie", "photoUrls": [], "status": "sold", "tags": []}' https://petstore3.swagger.io/api/v3/pet
+
+3. Test Case ID: HWgHZp
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"message":"There was an error processing your request. It has been logged (ID: e3f3015c4430706e)"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d '{"name": "", "photoUrls": []}' https://petstore3.swagger.io/api/v3/pet
+
+_____________________________________ POST /store/order _____________________________________
+1. Test Case ID: FyJaAK
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"message":"There was an error processing your request. It has been logged (ID: c243f80e8e6263d0)"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' -d 'id=10&petId=198772&quantity=7&status=approved' https://petstore3.swagger.io/api/v3/store/order
+
+2. Test Case ID: qTmRfB
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '{"complete": false, "id": 10, "petId": 198772, "quantity": 7, "shipDate": "2000-01-01T00:00:00Z", "status": "approved"}' https://petstore3.swagger.io/api/v3/store/order
+
+_________________________________________ POST /user ________________________________________
+1. Test Case ID: NdQd7G
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"message":"There was an error processing your request. It has been logged (ID: 62dffd7ecb4616d4)"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' -d 'id=10&username=theUser&firstName=John&lastName=James&email=john%40email.com&password=12345&phone=12345&userStatus=1' https://petstore3.swagger.io/api/v3/user
+
+2. Test Case ID: NFXUUy
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '{"email": "john@email.com", "firstName": "John", "id": 10, "lastName": "James", "password": "12345", "phone": "12345", "userStatus": 1, "username": "theUser"}' https://petstore3.swagger.io/api/v3/user
+
+_________________________________ POST /user/createWithList _________________________________
+1. Test Case ID: jM7yAy
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"message":"There was an error processing your request. It has been logged (ID: f9434691bf202d9b)"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d '[{"id": 10, "username": "theUser", "firstName": "John", "lastName": "James", "email": "john@email.com", "password": "12345", "phone": "12345", "userStatus": 1}]' https://petstore3.swagger.io/api/v3/user/createWithList
+
+2. Test Case ID: A3ejY7
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '[]' https://petstore3.swagger.io/api/v3/user/createWithList
+
+3. Test Case ID: W6o4kq
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+[400] Bad Request:
+
+    `No User provided. Try again?`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d '[]' https://petstore3.swagger.io/api/v3/user/createWithList
+
+__________________________________________ PUT /pet _________________________________________
+1. Test Case ID: 58dDrG
+
+- Response violates schema
+
+    'photoUrls' is a required property
+
+    Schema:
+
+        {
+            "required": [
+                "name",
+                "photoUrls"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 10
+                },
+                "name": {
+                    "type": "string",
+                    "example": "doggie"
+                },
+                "category": {
+                    "$ref": "#/components/schemas/Category"
+                },
+            // Output truncated...
+        }
+
+    Value:
+
+        {
+            "id": 10,
+            "name": "doggie"
+        }
+
+[200] OK:
+
+    `{"id":10,"name":"doggie"}`
+
+Reproduce with:
+
+    curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -d 'id=10&name=doggie&category=id&category=name' https://petstore3.swagger.io/api/v3/pet
+
+2. Test Case ID: DdV0Cb
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '{"category": {}, "id": 10, "name": "doggie", "photoUrls": [], "status": "sold", "tags": []}' https://petstore3.swagger.io/api/v3/pet
+
+3. Test Case ID: ng68ZS
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"message":"There was an error processing your request. It has been logged (ID: 80035e214be2b067)"}`
+
+Reproduce with:
+
+    curl -X PUT -H 'Content-Type: application/json' -d '{"name": "", "photoUrls": []}' https://petstore3.swagger.io/api/v3/pet
+
+____________________________________ PUT /user/{username} ___________________________________
+1. Test Case ID: h9FD7Y
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"message":"There was an error processing your request. It has been logged (ID: 7fcc6a0e91ff801a)"}`
+
+Reproduce with:
+
+    curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -d 'id=10&username=theUser&firstName=John&lastName=James&email=john%40email.com&password=12345&phone=12345&userStatus=1' https://petstore3.swagger.io/api/v3/user/0
+
+2. Test Case ID: pn9zHv
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/json' -d '{"email": "john@email.com", "firstName": "John", "id": 10, "lastName": "James", "password": "12345", "phone": "12345", "userStatus": 1, "username": "theUser"}' https://petstore3.swagger.io/api/v3/user/0
+
+__________________________________ DELETE /user/{username} __________________________________
+1. Test Case ID: enQm6t
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore3.swagger.io/api/v3/user/0
+
+2. Test Case ID: QOO6eW
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"message":"There was an error processing your request. It has been logged (ID: bb7b8d9165d25896)"}`
+
+Reproduce with:
+
+    curl -X DELETE https://petstore3.swagger.io/api/v3/user/0
+
+___________________________________ GET /pet/findByStatus ___________________________________
+1. Test Case ID: WxKKmw
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE 'https://petstore3.swagger.io/api/v3/pet/findByStatus?status=available'
+
+2. Test Case ID: 0wls5e
+
+- Response violates schema
+
+    'name' is a required property
+
+    Schema at /items:
+
+        {
+            "required": [
+                "name",
+                "photoUrls"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 10
+                },
+                "name": {
+                    "type": "string",
+                    "example": "doggie"
+                },
+                "category": {
+                    "$ref": "#/components/schemas/Category"
+                },
+            // Output truncated...
+        }
+
+    Value:
+
+        {
+            "id": 368879,
+            "category": {
+                "id": 387775,
+                "name": "Lucky"
+            },
+            "photoUrls": [
+                "https://dummyimage.com/439x4"
+            ],
+            "tags": [
+                {
+                    "id": 907797,
+                    "name": "major"
+                }
+            ],
+            "status": "sold"
+        }
+
+[200] OK:
+
+    `[{"id":9223372016900053455,"category":{"id":83700112,"name":"Siberian Husky"},"name":"Toby","photoUrls":["https://example.com/image1.jpg"],"tags":[{"id":655893,"name":"Poodle"},{"id":87645337,"name":"Turkish Angora"}],"status":"sold"},{"id":9223372016900070989,"category":{"id":37743167,"name":"Birman"},"name":"Sadie","photoUrls":["https://example.com/image1.jpg"],"tags":[{"id":608540,"name":"Egyptian Mau"},{"id":82755027,"name":"Bengal"}],"status":"sold"},{"id":9223372016900079570,"category":{"id":85945122, // Output truncated...`
+
+Reproduce with:
+
+    curl -X GET 'https://petstore3.swagger.io/api/v3/pet/findByStatus?status=sold'
+
+____________________________________ GET /pet/findByTags ____________________________________
+1. Test Case ID: KWRbVn
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore3.swagger.io/api/v3/pet/findByTags
+
+2. Test Case ID: F8t26o
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+[400] Bad Request:
+
+    `{"code":400,"message":"Input error: missing required query parameter `tags`"}`
+
+Reproduce with:
+
+    curl -X GET https://petstore3.swagger.io/api/v3/pet/findByTags
+
+____________________________________ GET /store/inventory ___________________________________
+1. Test Case ID: T0ikJJ
+
+- Server error
+
+- Missing header not rejected
+
+    Got 500 when missing required 'api_key' header, expected 406
+
+[500] Internal Server Error:
+
+    `{"code":500,"message":"There was an error processing your request. It has been logged (ID: 20496ffec252ca79)"}`
+
+Reproduce with:
+
+    curl -X GET https://petstore3.swagger.io/api/v3/store/inventory
+
+______________________________________ GET /user/login ______________________________________
+1. Test Case ID: fHpZhS
+
+- Response header does not conform to the schema
+
+    'Wed Dec 10 17:42:17 UTC 2025' is not a 'date-time'
+
+    Schema:
+
+        {
+            "format": "date-time",
+            "type": "string"
+        }
+
+    Value:
+
+        "Wed Dec 10 17:42:17 UTC 2025"
+
+- JSON deserialization error
+
+    Response must be valid JSON with 'Content-Type: application/json' header:
+
+      Expecting value: line 1 column 1 (char 0)
+
+[200] OK:
+
+    `Logged in user session: 69281791184033346`
+
+Reproduce with:
+
+    curl -X GET 'https://petstore3.swagger.io/api/v3/user/login?username=&x-schemathesis-unknown-property=42'
+
+______________________________________ GET /user/logout _____________________________________
+1. Test Case ID: kD2HzL
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore3.swagger.io/api/v3/user/logout
+
+____________________________________ GET /user/{username} ___________________________________
+1. Test Case ID: VSX0Gs
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore3.swagger.io/api/v3/user/0
+
+2. Test Case ID: 9RsDxb
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"message":"There was an error processing your request. It has been logged (ID: 7d8b56cb80a1b6d8)"}`
+
+Reproduce with:
+
+    curl -X GET https://petstore3.swagger.io/api/v3/user/0
+
+____________________________________ DELETE /pet/{petId} ____________________________________
+1. Test Case ID: LNyA6R
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'api_key: [Filtered]' https://petstore3.swagger.io/api/v3/pet/0
+
+2. Test Case ID: d4T3Tb
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+[400] Bad Request:
+
+    `<h1>Bad Message 400</h1><pre>reason: Illegal character CNTL=0xb</pre>`
+
+Reproduce with:
+
+    curl -X DELETE -H 'api_key: [Filtered]' https://petstore3.swagger.io/api/v3/pet/10707
+
+_______________________________ DELETE /store/order/{orderId} _______________________________
+1. Test Case ID: HbHjEj
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore3.swagger.io/api/v3/store/order/0
+
+2. Test Case ID: s4XDyh
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"message":"There was an error processing your request. It has been logged (ID: 801da98954a30f96)"}`
+
+Reproduce with:
+
+    curl -X DELETE https://petstore3.swagger.io/api/v3/store/order/0
+
+______________________________________ GET /pet/{petId} _____________________________________
+1. Test Case ID: vvvESE
+
+- Missing header not rejected
+
+    Got 404 when missing required 'api_key' header, expected 406
+
+[404] Not Found:
+
+    `Pet not found`
+
+Reproduce with:
+
+    curl -X GET https://petstore3.swagger.io/api/v3/pet/0
+
+2. Test Case ID: gDLSLH
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+[400] Bad Request:
+
+    `<h1>Bad Message 400</h1><pre>reason: Illegal character CNTL=0x16</pre>`
+
+Reproduce with:
+
+    curl -X GET -H 'api_key: [Filtered]' https://petstore3.swagger.io/api/v3/pet/25389
+
+_________________________________ GET /store/order/{orderId} ________________________________
+1. Test Case ID: l74lMy
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE https://petstore3.swagger.io/api/v3/store/order/0
+
+2. Test Case ID: qZtQOO
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"message":"There was an error processing your request. It has been logged (ID: 2373f22151415ee9)"}`
+
+Reproduce with:
+
+    curl -X GET https://petstore3.swagger.io/api/v3/store/order/0
+
+_____________________________________ POST /pet/{petId} _____________________________________
+1. Test Case ID: FhIJ3D
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+[400] Bad Request:
+
+    `No Name provided. Try again?`
+
+Reproduce with:
+
+    curl -X POST 'https://petstore3.swagger.io/api/v3/pet/0?status='
+
+_______________________________ POST /pet/{petId}/uploadImage _______________________________
+1. Test Case ID: PV7Vpg
+
+- Unsupported methods
+
+    TRACE returned 405 without required `Allow` header
+
+    Add `Allow` header listing supported methods (required by RFC 9110)
+
+[405] Method Not Allowed:
+
+    `<html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    </body>
+    </html>`
+
+Reproduce with:
+
+    curl -X TRACE -H 'Content-Type: application/octet-stream' 'https://petstore3.swagger.io/api/v3/pet/0/uploadImage?additionalMetadata='
+
+2. Test Case ID: OwxU9H
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+[400] Bad Request:
+
+    `No file uploaded`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/octet-stream' https://petstore3.swagger.io/api/v3/pet/0/uploadImage
+
+_______________________________________ Stateful tests ______________________________________
+1. Test Case ID: rdwLwE
+
+- Server error
+
+[500] Internal Server Error:
+
+    `{"code":500,"message":"There was an error processing your request. It has been logged (ID: 0d19c8222989684b)"}`
+
+Reproduce with:
+
+    curl -X GET 'https://petstore3.swagger.io/api/v3/pet/findByTags?tags=5&tags=%C2%99m%C2%98V%01%2B%C2%9Ff%C2%98&tags=%03%2A'
+
+2. Test Case ID: rD90UR
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+[400] Bad Request:
+
+    `No User provided. Try again?`
+
+Reproduce with:
+
+    curl -X POST https://petstore3.swagger.io/api/v3/user
+
+3. Test Case ID: T7NmXE
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+[400] Bad Request:
+
+    `No Order provided. Try again?`
+
+Reproduce with:
+
+    curl -X POST https://petstore3.swagger.io/api/v3/store/order
+
+4. Test Case ID: u5JJSi
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+[400] Bad Request:
+
+    `{"code":400,"message":"Input error: unable to convert input to io.swagger.petstore.model.Pet"}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/xml' 'https://petstore3.swagger.io/api/v3/pet/findByStatus?status=pending'
+    curl -X POST -H 'Content-Type: application/xml' -d '<pet><name>¡-ràM󝘐;ô󮵭ª®ÒÑúO񰯦</name><photoUrls><photoUrl>COM1</photoUrl><photoUrl></photoUrl><photoUrl>𝕿𝖍𝖊 𝖖𝖚𝖎𝖈𝖐 𝖇𝖗𝖔𝖜𝖓 𝖋𝖔𝖝 𝖏𝖚𝖒𝖕𝖘 𝖔𝖛𝖊𝖗 𝖙𝖍𝖊 𝖑𝖆𝖟𝖞 𝖉𝖔𝖌</photoUrl><photoUrl>÷x_</photoUrl><photoUrl></photoUrl></photoUrls><_________V><element>19005</element><element>True</element><element>61</element><___C_>-4.1711020720237416e+16</___C_><___C_></___C_><_><_________4______Sk__7_q_s>-3.0284041787679316e+16</_________4______Sk__7_q_s></_></_________V><____J><element>True</element></____J><____J></____J><____J><element><______>True</______><element>-30044</element></element></____J><tags></tags><status>pending</status></pet>' https://petstore3.swagger.io/api/v3/pet
+
+5. Test Case ID: 0etYED
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in body - violates `$ref` (#/x-bundled/schema875)
+
+[200] OK:
+
+    `{"id":834673,"photoUrls":[],"tags":[]}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/json' 'https://petstore3.swagger.io/api/v3/pet/findByStatus?status=pending'
+    curl -X PUT -H 'Content-Type: application/json' -d '{"id": 834673}' https://petstore3.swagger.io/api/v3/pet
+
+6. Test Case ID: c53T4p
+
+- Response violates schema
+
+    '\x1cp' is not one of ['available', 'pending', 'sold']
+
+    Schema at /properties/status:
+
+        {
+            "enum": [
+                "available",
+                "pending",
+                "sold"
+            ],
+            "type": "string",
+            "description": "pet status in the store"
+        }
+
+    Value:
+
+        "\u001cp"
+
+[200] OK:
+
+    `{"id":18,"category":{"id":5,"name":"кошка"},"name":"\u000B","photoUrls":["string"],"tags":[{"id":1,"name":"Пудель"}],"status":"\u001Cp"}`
+
+Reproduce with:
+
+    curl -X POST 'https://petstore3.swagger.io/api/v3/pet/18?name=%0B&status=%1Cp'
+
+7. Test Case ID: 4epjdR
+
+- Use after free
+
+    The API did not return a `HTTP 404 Not Found` response (got `HTTP 200 OK`) for a resource that was previously deleted.
+
+    The resource was deleted with `DELETE /pet/43232`
+
+[200] OK:
+
+    `Pet deleted`
+
+Reproduce with:
+
+    curl -X GET 'https://petstore3.swagger.io/api/v3/pet/findByStatus?status=available'
+    curl -X DELETE https://petstore3.swagger.io/api/v3/pet/43232
+
+8. Test Case ID: zUw20Z
+
+- API accepts invalid authentication
+
+    Expected 401, got `200 OK` for `GET /pet/{petId}` (generated auth likely invalid)
+
+[200] OK:
+
+    `{"id":10411,"name":"`\n\uDBC7\uDEFB\uDB51\uDD4Eûil\u0016]","photoUrls":["«\uD9D5\uDC17æÑ","t©\u000F","\uDA9F\uDFD9\uD962\uDE2F¯","X","\uDB0E\uDEDD\u001B\uDAAA\uDCA9o½","eú"],"tags":[]}`
+
+Reproduce with:
+
+    curl -X POST -H 'api_key: [Filtered]' -H 'Content-Type: application/json' -d '{"name": "\u008f`\n\udbc7\udefb\udb51\udd4e\u00fb\u009dil\u0016\u0089]", "photoUrls": ["\u00ab\ud9d5\udc17\u00e6\u00d1", "t\u00a9\u000f", "\uda9f\udfd9\ud962\ude2f\u00af", "X", "\udb0e\udedd\u001b\udaaa\udca9o\u00bd", "e\u00fa"], "id": 10411}' https://petstore3.swagger.io/api/v3/pet
+    curl -X GET -H 'api_key: [Filtered]' https://petstore3.swagger.io/api/v3/pet/10411
+
+9. Test Case ID: bbzjhk
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in query - violates `additionalProperties` (False)
+
+[200] OK:
+
+    `{"id":-79,"name":"$\uD870\uDC88`","photoUrls":["­O","/tmp/inflector1438277344899689578.tmp"]}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/octet-stream' -d 'name=%24%C2%91%F0%AC%82%88%60%C2%83&photoUrls=%D8%A7%D9%84%D9%83%D9%84+%D9%81%D9%8A+%D8%A7%D9%84%D9%85%D8%AC%D9%85%D9%88+%D8%B9%D8%A9&photoUrls=&photoUrls=%5D%C3%84%C3%82%C2%B7%C2%8F%C2%8D&photoUrls=&photoUrls=%C3%BA&photoUrls=%C2%ADO&id=-79' https://petstore3.swagger.io/api/v3/pet
+    curl -X POST -H 'Content-Type: application/octet-stream' -d None 'https://petstore3.swagger.io/api/v3/pet/-79/uploadImage?%5B%F1%B6%AC%A5%C2%9D=%C3%8F&%5B%F1%B6%AC%A5%C2%9D=%F0%B8%B7%81%C3%86'
+
+10. Test Case ID: OhhONc
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in body - violates `$ref` (#/x-bundled/schema884)
+
+[200] OK:
+
+    `{"id":57623,"photoUrls":[],"tags":[]}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/json' 'https://petstore3.swagger.io/api/v3/pet/findByStatus?status=available'
+    curl -X POST -H 'Content-Type: application/json' -d '{"": {"": [[-17838], "\u0086I", [6.494846258711162e-275, null, 116]]}, "id": 57623}' https://petstore3.swagger.io/api/v3/pet
+
+11. Test Case ID: aWSCP3
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 409, 5xx
+
+[400] Bad Request:
+
+    `{"code":400,"message":"Input error: unable to convert input to io.swagger.petstore.model.Pet"}`
+
+Reproduce with:
+
+    curl -X GET -H 'Content-Type: application/xml' 'https://petstore3.swagger.io/api/v3/pet/findByStatus?status=sold'
+    curl -X PUT -H 'Content-Type: application/xml' -d '<pet><name>°</name><photoUrls><photoUrl>𝓣𝓱𝓮 𝓺𝓾𝓲𝓬𝓴 𝓫𝓻𝓸𝔀𝓷 𝓯𝓸𝔁 𝓳𝓾𝓶𝓹𝓼 𝓸𝓿𝓮𝓻 𝓽𝓱𝓮 𝓵𝓪𝔃𝔂 𝓭𝓸𝓰</photoUrl><photoUrl>񴁱𜷫󬶓</photoUrl><photoUrl>3éî񷦐</photoUrl></photoUrls><___F___><element><_S______>Õ잟</_S______><p>False</p><_______q_>True</_______q_></element><__S><_>-2.421947073030401e+249</_><____o___i_____n___v_____o____k__________t_______h_______e____________h_______i_____v__e_____-m_i_n______d______________r___e_p_r_____e____s______e________________t________i__n_g______c__h_a____o_______s___.____>ß,</____o___i_____n___v_____o____k__________t_______h_______e____________h_______i_____v__e_____-m_i_n______d______________r___e_p_r_____e____s______e________________t________i__n_g______c__h_a____o_______s___.____><______i____>1.8645768490885992e+198</______i____></__S><_____v___U>-25843</_____v___U></___F___><id>41</id></pet>' https://petstore3.swagger.io/api/v3/pet
+
+========================================== SUMMARY ==========================================
+
+API Operations:
+  Selected: 19/19
+  Tested: 19
+
+Test Phases:
+  ❌ Examples
+  ❌ Coverage
+  ❌ Fuzzing
+  ❌ Stateful
+
+Failures:
+  ❌ API accepts invalid authentication: 1
+  ❌ Server error: 12
+  ❌ Use after free: 1
+  ❌ Response header does not conform to the schema: 1
+  ❌ Response violates schema: 4
+  ❌ API accepted schema-violating request: 3
+  ❌ API rejected schema-compliant request: 10
+  ❌ JSON deserialization error: 1
+  ❌ Missing header not rejected: 2
+  ❌ Unsupported methods: 15
+
+Test cases:
+  1844 generated, 48 found 50 unique failures
+
+Seed: 20606391220920229574551495432616138366
+
+=================================== 50 failures in 311.22s ==================================
